@@ -22,7 +22,10 @@ class Game
   
   sf::Texture background_texture;
   sf::Sprite background = sf::Sprite(background_texture);
-
+  sf::Texture bird_texture;
+  sf::Sprite bird = sf::Sprite(bird_texture);
+  sf::Font font;
+  sf::Text title = sf::Text(font);
 };
 
 #endif // SFML_GAME_H

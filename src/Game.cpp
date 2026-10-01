@@ -16,6 +16,33 @@ Game::~Game()
 // We call this once after the game class is instantiated
 bool Game::init()
 {
+	if (!background_texture.loadFromFile("../Data/Images/WhackaMole Worksheet/background.png"))
+	{
+		std::cout << "bg texture did not load\n";
+	}
+	background.setTexture(background_texture);
+	background = sf::Sprite(background_texture);
+
+	if (!bird_texture.loadFromFile("../Data/Images/WhackaMole Worksheet/bird.png"))
+	{
+		std::cout << "bird texture did not load\n";
+	}
+	bird.setTexture(bird_texture);
+	bird = sf::Sprite(bird_texture);
+	bird.setPosition({ 100, 100 });
+
+	if (!font.openFromFile("../Data/fonts/Opensans-Bold.ttf"))
+	{
+		std::cout << "title not load\n";
+	}
+	title.setString("*whack-a-bird");
+	title.setFont(font);
+	title.setCharacterSize(100);
+	title.setFillColor(sf::Color(255, 255, 255, 125));
+	title.setPosition({
+		window.getSize().x / 2 - title.getGlobalBounds().size.x / 2,
+		window.getSize().y / 2 - title.getGlobalBounds().size.y / 2
+		});
 
   return true;
 }
@@ -30,7 +57,10 @@ void Game::update(float dt)
 // Runs after update, use it to tell the window what to draw this frame
 void Game::render()
 {
-
+	
+	window.draw(background);
+	window.draw(bird);
+	window.draw(title);
 }
 
 //Called by event polling when a MouseButtonPressed event is found
