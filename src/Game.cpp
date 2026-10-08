@@ -18,8 +18,11 @@ Game::~Game()
 // We call this once after the game class is instantiated
 bool Game::init()
 {
+//	background->setPosition
+
 	menu->setPosition({ 100, 100 });
 	menu->setString("does it work");
+	
 	state = MENU;
   return true;
 }
@@ -63,6 +66,7 @@ void Game::LateUpdate()
 // Runs after update, use it to tell the window what to draw this frame
 void Game::render()
 {
+	window.draw(*background);
 window.draw(*menu);
 }
 

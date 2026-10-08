@@ -26,12 +26,14 @@ public:
 private:
 	sf::RenderWindow& window;
 
-	sf::Texture background_texture;
-	sf::Sprite background = sf::Sprite(background_texture);
+	//sf::Texture background_texture;
+	//sf::Sprite background = sf::Sprite(background_texture);
 
+	sf::Texture* background_texture = new sf::Texture("../Data/Images/WhackaMole Worksheet/background.png");
+	sf::Sprite* background = new sf::Sprite(*background_texture);
 
 	sf::Font* f = new sf::Font("../Data/Fonts/OpenSans-Bold.ttf");//path goes here;
-sf::Text* menu =  new sf::Text(*f);
+    sf::Text* menu =  new sf::Text(*f);
 };
 
 #endif // SFML_GAME_H
