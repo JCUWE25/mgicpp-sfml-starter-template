@@ -2,6 +2,8 @@
 #include "Game.h"
 #include <iostream>
 
+
+
 Game::Game(sf::RenderWindow& game_window)
   : window(game_window)
 {
@@ -16,7 +18,8 @@ Game::~Game()
 // We call this once after the game class is instantiated
 bool Game::init()
 {
-
+	
+	state = MENU;
   return true;
 }
 
@@ -24,8 +27,37 @@ bool Game::init()
 // use it for everything that needs to update between frames
 void Game::update(float dt)
 {
+	
+if (hasStateChanged)
+	{
 
+	switch(state)
+	{
+	case MENU:
+		std::cout << "menu";
+
+
+		break;
+	case GAME:
+		std::cout << "game";
+
+
+		break;
+	case QUIT:
+		std::cout << "quit";
+		break;
+
+	}
+	hasStateChanged = false;
+	}
 }
+
+void Game::LateUpdate()
+{
+	
+}
+
+
 
 // Runs after update, use it to tell the window what to draw this frame
 void Game::render()
@@ -65,6 +97,41 @@ void Game::keyPressed(const sf::Event::KeyPressed* event)
 	if (event->scancode == sf::Keyboard::Scancode::W)
 	{
 		// W was pressed
+	}
+
+	switch (state)
+	{
+	case MENU:
+		if (event->scancode == sf::Keyboard::Scancode::Enter)
+		{
+			state = GAME;
+			hasStateChanged = true;
+
+		}
+
+
+		break;
+	case GAME:
+		if(event->scancode == sf::Keyboard::Scancode::Q)
+		{
+		
+		state = QUIT;
+			hasStateChanged = true;
+		
+		}
+
+
+		break;
+	case QUIT:
+		if(event->scancode == sf::Keyboard::Scancode::Enter)
+		{
+			state = MENU;
+			hasStateChanged = true;
+
+		}
+
+		break;
+
 	}
 
 }
