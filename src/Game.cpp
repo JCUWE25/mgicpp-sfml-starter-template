@@ -59,7 +59,7 @@ if (hasStateChanged)
 		break;
 	case GAME:
 		std::cout << "game";
-&DragSprite;
+//&Game::DragSprite();
 		
 		break;
 	case QUIT:
