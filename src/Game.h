@@ -22,6 +22,9 @@ public:
 	void mouseButtonReleased(const sf::Event::MouseButtonReleased* event);
 	void keyPressed(const sf::Event::KeyPressed* event);
 	void keyReleased(const sf::Event::KeyReleased* event);
+	void NewAnimal();
+	void DragSprite(sf::Sprite* sprite);
+
 
 private:
 	sf::RenderWindow& window;
@@ -31,9 +34,18 @@ private:
 
 	sf::Texture* background_texture = new sf::Texture("../Data/Images/WhackaMole Worksheet/background.png");
 	sf::Sprite* background = new sf::Sprite(*background_texture);
+	
+	sf::Sprite* Character;
+	sf::Sprite* Passport;
+	sf::Texture* Animals = new sf::Texture[3];
+	sf::Texture* Passports = new sf::Texture[3];
 
 	sf::Font* f = new sf::Font("../Data/Fonts/OpenSans-Bold.ttf");//path goes here;
     sf::Text* menu =  new sf::Text(*f);
+
+    bool shouldACCEPT;
+	
+	sf::Sprite* dragged = nullptr;
 };
 
 #endif // SFML_GAME_H
