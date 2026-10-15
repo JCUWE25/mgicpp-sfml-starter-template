@@ -59,7 +59,7 @@ if (hasStateChanged)
 		break;
 	case GAME:
 		std::cout << "game";
-
+		
 		
 		break;
 	case QUIT:
@@ -70,8 +70,8 @@ if (hasStateChanged)
 	hasStateChanged = false;
 	}
 DragSprite(dragged);
-
-
+Astamp->setPosition({ Passport->getPosition().x, Passport->getPosition().y });
+Rstamp->setPosition({ Passport->getPosition().x, Passport->getPosition().y });
 }
 
 void Game::LateUpdate()
@@ -100,6 +100,10 @@ void Game::render()
 		if (ClickStampA == true)
 		{
 			window.draw(*Astamp);
+		}
+		if (ClickStampR == true)
+		{
+			window.draw(*Rstamp);
 		}
 
 		break;
@@ -130,10 +134,12 @@ void Game::mouseButtonPressed(const sf::Event::MouseButtonPressed* event)
 		if (AstampButton->getGlobalBounds().contains(click))
 		{
 			ClickStampA = true;
-			float tempX = Passport->getPosition().x;
-			float tempY = Passport->getPosition().y;
 
-			Astamp->setPosition({ tempX, tempY });
+		}
+		if (RstampButton->getGlobalBounds().contains(click))
+		{
+			ClickStampR = true;
+
 		}
 	}
 	
