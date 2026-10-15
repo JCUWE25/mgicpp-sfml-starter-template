@@ -24,7 +24,6 @@ public:
 	void keyReleased(const sf::Event::KeyReleased* event);
 	void NewAnimal();
 	void DragSprite(sf::Sprite* sprite);
-	void Isclicked();
 
 
 private:
@@ -36,6 +35,12 @@ private:
 	//REJECT BUTTON
 	sf::Texture* RstampButton_Texture = new sf::Texture("../Data/Images/Critter Crossing/reject button.png");
 	sf::Sprite* RstampButton = new sf::Sprite(*RstampButton_Texture);
+	//REJECT STAMP
+	sf::Texture* Rstamp_Texture = new sf::Texture("../Data/Images/Critter Crossing/reject.png");
+	sf::Sprite* Rstamp = new sf::Sprite(*Rstamp_Texture);
+	// ACCEPT STAMP
+    sf::Texture* Astamp_Texture = new sf::Texture("../Data/Images/Critter Crossing/accept.png");
+	sf::Sprite* Astamp = new sf::Sprite(*Astamp_Texture);
 	// ACCEPT BUTTON
 	sf::Texture* AstampButton_Texture = new sf::Texture("../Data/Images/Critter Crossing/accept button.png");
 	sf::Sprite* AstampButton = new sf::Sprite(*AstampButton_Texture);

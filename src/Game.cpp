@@ -97,6 +97,10 @@ void Game::render()
 			window.draw(*RstampButton);
 			window.draw(*AstampButton);
 		}
+		if (ClickStampA == true)
+		{
+			window.draw(*Astamp);
+		}
 
 		break;
 	case QUIT:
@@ -123,7 +127,14 @@ void Game::mouseButtonPressed(const sf::Event::MouseButtonPressed* event)
 		{
 			dragged = Passport;
 		}
-		
+		if (AstampButton->getGlobalBounds().contains(click))
+		{
+			ClickStampA = true;
+			float tempX = Passport->getPosition().x;
+			float tempY = Passport->getPosition().y;
+
+			Astamp->setPosition({ tempX, tempY });
+		}
 	}
 	
 		if(event->button == sf::Mouse::Button::Right)
@@ -251,10 +262,6 @@ void Game::DragSprite(sf::Sprite* sprite)
 
 }
 
-void Game::Isclicked()
-{
-
-}
 
 
 
