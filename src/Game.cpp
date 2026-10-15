@@ -69,9 +69,20 @@ if (hasStateChanged)
 	}
 	hasStateChanged = false;
 	}
+
 DragSprite(dragged);
+//stamp stick to passport
 Astamp->setPosition({ Passport->getPosition().x, Passport->getPosition().y });
 Rstamp->setPosition({ Passport->getPosition().x, Passport->getPosition().y });
+
+//accept bool variable
+if(ClickStampA == true)
+{
+	PassportAccepted = true;
+}else
+{
+	PassportAccepted == false;
+}
 }
 
 void Game::LateUpdate()
@@ -88,9 +99,9 @@ void Game::render()
 			break;
 	case GAME:
 		window.draw(*background);
-		window.draw(*menu);
 		window.draw(*Character);
 		window.draw(*Passport);
+        window.draw(*menu);
 
 		if(StampsVisible == true)
 		{
@@ -161,15 +172,21 @@ void Game::mouseButtonPressed(const sf::Event::MouseButtonPressed* event)
 //Called by event polling when a MouseButtonReleased event is found
 void Game::mouseButtonReleased(const sf::Event::MouseButtonReleased* event)
 {
+	sf::Vector2f click = static_cast<sf::Vector2f>(event->position);
 	//Works the same as MouseButtonPressed
 	if (event->button == sf::Mouse::Button::Left)
 	{
 		//Left mouse button was released
 		dragged = nullptr;
+		//handing back passport
+	if (Character->getGlobalBounds().contains(click))
+		{
+			std::cout << "gagagagagagagagagagag";
+		}
 	}
 	if (event->button == sf::Mouse::Button::Right)
 	{
-
+	
 		StampsVisible = false;
 	}
 }

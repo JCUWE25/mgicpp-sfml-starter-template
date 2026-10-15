@@ -60,7 +60,7 @@ private:
 	bool Passport_A;
 	bool ClickStampR;
 	bool ClickStampA;
-	
+	bool PassportAccepted;
 	
 	sf::Vector2f drag_offset;
 	sf::Sprite* dragged = nullptr;
