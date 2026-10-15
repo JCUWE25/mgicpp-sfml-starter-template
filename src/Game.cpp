@@ -125,19 +125,20 @@ void Game::mouseButtonPressed(const sf::Event::MouseButtonPressed* event)
 		}
 		
 	}
-	// STAMP Position
 	
+		if(event->button == sf::Mouse::Button::Right)
+	{
+		
+		StampsVisible = true;
+	}
+	// STAMP Position
 		float Stamp_X = sf::Mouse::getPosition(window).x;
 		float Stamp_Y = sf::Mouse::getPosition(window).y;
 		RstampButton->setPosition({Stamp_X, Stamp_Y});
 		AstampButton->setPosition({ Stamp_X, Stamp_Y+100 });
 	
 
-	if(event->button == sf::Mouse::Button::Right)
-	{
-		
-		StampsVisible = true;
-	}
+
 }
 
 //Called by event polling when a MouseButtonReleased event is found
@@ -247,6 +248,11 @@ void Game::DragSprite(sf::Sprite* sprite)
 		sf::Vector2f drag_position = mouse_positionf - drag_offset;
 		sprite->setPosition({drag_position.x, drag_position.y});
 	}
+
+}
+
+void Game::Isclicked()
+{
 
 }
 
