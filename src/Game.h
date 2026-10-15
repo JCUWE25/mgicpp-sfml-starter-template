@@ -29,11 +29,15 @@ public:
 private:
 	sf::RenderWindow& window;
 
-	//sf::Texture background_texture;
-	//sf::Sprite background = sf::Sprite(background_texture);
-
+    //BG
 	sf::Texture* background_texture = new sf::Texture("../Data/Images/WhackaMole Worksheet/background.png");
 	sf::Sprite* background = new sf::Sprite(*background_texture);
+	//REJECT BUTTON
+	sf::Texture* RstampButton_Texture = new sf::Texture("../Data/Images/Critter Crossing/reject button.png");
+	sf::Sprite* RstampButton = new sf::Sprite(*RstampButton_Texture);
+	// ACCEPT BUTTON
+	sf::Texture* AstampButton_Texture = new sf::Texture("../Data/Images/Critter Crossing/accept button.png");
+	sf::Sprite* AstampButton = new sf::Sprite(*AstampButton_Texture);
 	
 	sf::Sprite* Character;
 	sf::Sprite* Passport;
@@ -44,7 +48,10 @@ private:
     sf::Text* menu =  new sf::Text(*f);
 
     bool shouldACCEPT;
+	bool StampsVisible;
+	bool DoubleClick;
 	
+	sf::Vector2f drag_offset;
 	sf::Sprite* dragged = nullptr;
 };
 

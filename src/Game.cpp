@@ -59,7 +59,7 @@ if (hasStateChanged)
 		break;
 	case GAME:
 		std::cout << "game";
-//&Game::DragSprite();
+
 		
 		break;
 	case QUIT:
@@ -69,14 +69,15 @@ if (hasStateChanged)
 	}
 	hasStateChanged = false;
 	}
+DragSprite(dragged);
+
+
 }
 
 void Game::LateUpdate()
 {
 	
 }
-
-
 
 // Runs after update, use it to tell the window what to draw this frame
 void Game::render()
@@ -90,6 +91,13 @@ void Game::render()
 		window.draw(*menu);
 		window.draw(*Character);
 		window.draw(*Passport);
+
+		if(StampsVisible == true)
+		{
+			window.draw(*RstampButton);
+			window.draw(*AstampButton);
+		}
+
 		break;
 	case QUIT:
 		break;
@@ -100,12 +108,14 @@ void Game::render()
 //Called by event polling when a MouseButtonPressed event is found
 void Game::mouseButtonPressed(const sf::Event::MouseButtonPressed* event)
 {
-	// Event contains mouse position and which button was clicked
 
 	// Don't need to extract position to a variable like this, this is just to show you it's a Vector2i
 	sf::Vector2i position = event->position;
 
-	// You can tell which button was pressed by comparing it to SFML's definitions of mouse buttons
+	sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
+	sf::Vector2f mouse_positionf = static_cast<sf::Vector2f>(mouse_position);
+	drag_offset = mouse_positionf - Passport->getPosition();
+
 	if (event->button == sf::Mouse::Button::Left)
 	{
 		sf::Vector2f click = static_cast<sf::Vector2f>(event->position);
@@ -113,7 +123,20 @@ void Game::mouseButtonPressed(const sf::Event::MouseButtonPressed* event)
 		{
 			dragged = Passport;
 		}
-		//Left mouse button was pressed
+		
+	}
+	// STAMP Position
+	
+		float Stamp_X = sf::Mouse::getPosition(window).x;
+		float Stamp_Y = sf::Mouse::getPosition(window).y;
+		RstampButton->setPosition({Stamp_X, Stamp_Y});
+		AstampButton->setPosition({ Stamp_X, Stamp_Y+100 });
+	
+
+	if(event->button == sf::Mouse::Button::Right)
+	{
+		
+		StampsVisible = true;
 	}
 }
 
@@ -124,6 +147,12 @@ void Game::mouseButtonReleased(const sf::Event::MouseButtonReleased* event)
 	if (event->button == sf::Mouse::Button::Left)
 	{
 		//Left mouse button was released
+		dragged = nullptr;
+	}
+	if (event->button == sf::Mouse::Button::Right)
+	{
+
+		StampsVisible = false;
 	}
 }
 
@@ -173,8 +202,6 @@ void Game::keyPressed(const sf::Event::KeyPressed* event)
 
 }
 
-
-
 // Called by event polling when a KeyReleased event is found
 void Game::keyReleased(const sf::Event::KeyReleased* event)
 {
@@ -210,14 +237,14 @@ void Game::NewAnimal()
 
 void Game::DragSprite(sf::Sprite* sprite)
 {
-
+	//std::cout << "it draggging";
 	if (sprite != nullptr) 
 	{
 		sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
 		sf::Vector2f mouse_positionf = static_cast<sf::Vector2f>(mouse_position);
-	//	sf::Vector2f drag_offset = ;
+	
 
-		sf::Vector2f drag_position = mouse_positionf; //- drag_offset;
+		sf::Vector2f drag_position = mouse_positionf - drag_offset;
 		sprite->setPosition({drag_position.x, drag_position.y});
 	}
 
