@@ -53,11 +53,15 @@ private:
 	sf::Font* f = new sf::Font("../Data/Fonts/OpenSans-Bold.ttf");//path goes here;
     sf::Text* menu =  new sf::Text(*f);
 	sf::Text* selection = new sf::Text(*f);
+	
 	sf::Text* lifes = new sf::Text(*f);
 	sf::Text* lifeNum = new sf::Text(*f);
+	sf::Text* task = new sf::Text(*f);
+	sf::Text* QuotaNum = new sf::Text(*f);
 
 	int lifesCounter = 3;
 	int ChosenOption = 1;
+	int qouta = 0;
 
     bool shouldACCEPT;
 	bool StampsVisible;
@@ -67,6 +71,7 @@ private:
 	bool ClickStampR;
 	bool ClickStampA;
 	bool served;
+	bool HasWon =false;
 	
 	sf::Vector2f drag_offset;
 	sf::Sprite* dragged = nullptr;

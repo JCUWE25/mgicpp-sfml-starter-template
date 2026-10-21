@@ -76,6 +76,13 @@ void Game::update(float dt)
 		
 		DragSprite(dragged);
 
+		QuotaNum->setPosition({ 900, 5 });
+		QuotaNum->setString(std::to_string(qouta));
+		QuotaNum->setCharacterSize(60);
+
+		task->setPosition({ 950, 5 });
+		task->setString("/6");
+		task->setCharacterSize(60);
 
 		lifes->setString("lifes: ");
 		lifes->setCharacterSize(60);
@@ -86,6 +93,11 @@ void Game::update(float dt)
 Astamp->setPosition({ Passport->getPosition().x, Passport->getPosition().y });
 Rstamp->setPosition({ Passport->getPosition().x, Passport->getPosition().y });
 
+if(qouta == 6)
+{
+	HasWon = true;
+	state = QUIT;
+}
 //new  passport
 if (served == true)
 {
@@ -96,7 +108,16 @@ if (served == true)
 }
 		break;
 	case QUIT:
-		menu->setString("Game Over");
+		
+
+		if (HasWon == false)
+		{
+menu->setString("Game Over");
+		}
+		else
+		{
+			menu->setString("You Won");
+		}
 
 		if (ChosenOption == 1)
 		{
@@ -143,6 +164,8 @@ void Game::render()
 		window.draw(*Passport);
         window.draw(*lifes);
 		window.draw(*lifeNum);
+		window.draw(*task);
+		window.draw(*QuotaNum);
 
 		if(StampsVisible == true)
 		{
@@ -298,6 +321,8 @@ void Game::keyPressed(const sf::Event::KeyPressed* event)
 			if (event->scancode == sf::Keyboard::Scancode::Enter && ChosenOption == 1)
 			{
 				state = GAME;
+				HasWon = false;
+				qouta = 0;
 				//hasStateChanged = true;
 
 			}
@@ -367,6 +392,8 @@ void Game::CorrectPassport()
 	{
 		menu->setString("correct");
 		served = true;
+		qouta++;
+
 	}
 	else if(shouldACCEPT == false && ClickStampA == true  || shouldACCEPT == true && ClickStampR == true)
 	{
