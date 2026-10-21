@@ -96,6 +96,16 @@ if (served == true)
 }
 		break;
 	case QUIT:
+		menu->setString("Game Over");
+
+		if (ChosenOption == 1)
+		{
+			selection->setString("<Retry>  Quit");
+		}
+		if (ChosenOption == 0)
+		{
+			selection->setString("Retry  <Quit>");
+		}
 		//std::cout << "quit";
 		break;
 
@@ -149,7 +159,10 @@ void Game::render()
 		}
 
 		break;
+		
 	case QUIT:
+        window.draw(*menu);
+		window.draw(*selection);
 		break;
 	}
 	
@@ -271,12 +284,28 @@ void Game::keyPressed(const sf::Event::KeyPressed* event)
 
 		break;
 	case QUIT:
-		if(event->scancode == sf::Keyboard::Scancode::Enter)
-		{
-			state = MENU;
+		
+			//state = MENU;
 			//hasStateChanged = true;
+			if (event->scancode == sf::Keyboard::Scancode::D)
+			{
+				ChosenOption = 0;
+			}
+			if (event->scancode == sf::Keyboard::Scancode::A)
+			{
+				ChosenOption = 1;
+			}
+			if (event->scancode == sf::Keyboard::Scancode::Enter && ChosenOption == 1)
+			{
+				state = GAME;
+				//hasStateChanged = true;
 
-		}
+			}
+			else if (event->scancode == sf::Keyboard::Scancode::Enter && ChosenOption == 0)
+			{
+				window.close();
+			}
+
 
 		break;
 
