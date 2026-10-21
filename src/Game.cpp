@@ -35,6 +35,7 @@ bool Game::init()
 
 	NewAnimal();
 
+	selection->setPosition({400, 400});
 	menu->setPosition({ 100, 100 });
 	menu->setString("does it work");
 	
@@ -54,8 +55,10 @@ void Game::update(float dt)
 	{
 	case MENU:
 	//	std::cout << "menu";
-
-
+		menu->setString("Critter Crossing");
+		menu->setCharacterSize(120);
+		selection->setString("Play  Quit");
+		selection->setCharacterSize(60);
 		break;
 	case GAME:
 		//std::cout << "game";
@@ -99,6 +102,8 @@ void Game::render()
 	switch(state)
 	{
 	case MENU:
+		window.draw(*menu);
+		window.draw(*selection);
 			break;
 	case GAME:
 		window.draw(*background);
@@ -204,14 +209,31 @@ void Game::keyPressed(const sf::Event::KeyPressed* event)
 		// W was pressed
 	}
 
+	
 	switch (state)
 	{
 	case MENU:
-		if (event->scancode == sf::Keyboard::Scancode::Enter)
+		//selection
+int ChosenOption;
+		if(event->scancode == sf::Keyboard::Scancode::D)
+		{
+			selection->setString("Play  <Quit>");
+			ChosenOption = 0;
+		}
+		if (event->scancode == sf::Keyboard::Scancode::A)
+		{
+			selection->setString("<Play>  Quit");
+			ChosenOption = 1;
+		}
+		if (event->scancode == sf::Keyboard::Scancode::Enter && ChosenOption == 1)
 		{
 			state = GAME;
 			//hasStateChanged = true;
 
+		}
+		else if (event->scancode == sf::Keyboard::Scancode::Enter && ChosenOption == 0)
+		{
+			window.close();
 		}
 
 

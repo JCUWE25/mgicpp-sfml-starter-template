@@ -52,6 +52,7 @@ private:
 
 	sf::Font* f = new sf::Font("../Data/Fonts/OpenSans-Bold.ttf");//path goes here;
     sf::Text* menu =  new sf::Text(*f);
+	sf::Text* selection = new sf::Text(*f);
 
     bool shouldACCEPT;
 	bool StampsVisible;
