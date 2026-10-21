@@ -24,7 +24,7 @@ public:
 	void keyReleased(const sf::Event::KeyReleased* event);
 	void NewAnimal();
 	void DragSprite(sf::Sprite* sprite);
-
+	void CorrectPassport();
 
 private:
 	sf::RenderWindow& window;
@@ -60,7 +60,7 @@ private:
 	bool Passport_A;
 	bool ClickStampR;
 	bool ClickStampA;
-	bool PassportAccepted;
+	bool served;
 	
 	sf::Vector2f drag_offset;
 	sf::Sprite* dragged = nullptr;

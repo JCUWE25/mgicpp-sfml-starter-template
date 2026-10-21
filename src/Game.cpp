@@ -47,42 +47,45 @@ bool Game::init()
 void Game::update(float dt)
 {
 	
-if (hasStateChanged)
-	{
+//if (hasStateChanged)
+//	{
 
 	switch(state)
 	{
 	case MENU:
-		std::cout << "menu";
+	//	std::cout << "menu";
 
 
 		break;
 	case GAME:
-		std::cout << "game";
+		//std::cout << "game";
 		
-		
-		break;
-	case QUIT:
-		std::cout << "quit";
-		break;
+		DragSprite(dragged);
 
-	}
-	hasStateChanged = false;
-	}
-
-DragSprite(dragged);
 //stamp stick to passport
 Astamp->setPosition({ Passport->getPosition().x, Passport->getPosition().y });
 Rstamp->setPosition({ Passport->getPosition().x, Passport->getPosition().y });
 
-//accept bool variable
-if(ClickStampA == true)
+//new  passport
+if (served == true)
 {
-	PassportAccepted = true;
-}else
-{
-	PassportAccepted == false;
+	ClickStampA = false;
+	ClickStampR = false;
+	NewAnimal();
+	served = false;
 }
+		break;
+	case QUIT:
+		//std::cout << "quit";
+		break;
+
+	}
+	/*hasStateChanged = false;
+	}*/
+
+
+
+
 }
 
 void Game::LateUpdate()
@@ -181,7 +184,8 @@ void Game::mouseButtonReleased(const sf::Event::MouseButtonReleased* event)
 		//handing back passport
 	if (Character->getGlobalBounds().contains(click))
 		{
-			std::cout << "gagagagagagagagagagag";
+			//std::cout << "gagagagagagagagagagag";
+			CorrectPassport();
 		}
 	}
 	if (event->button == sf::Mouse::Button::Right)
@@ -206,7 +210,7 @@ void Game::keyPressed(const sf::Event::KeyPressed* event)
 		if (event->scancode == sf::Keyboard::Scancode::Enter)
 		{
 			state = GAME;
-			hasStateChanged = true;
+			//hasStateChanged = true;
 
 		}
 
@@ -217,7 +221,7 @@ void Game::keyPressed(const sf::Event::KeyPressed* event)
 		{
 		
 		state = QUIT;
-			hasStateChanged = true;
+			//hasStateChanged = true;
 		
 		}
 
@@ -227,7 +231,7 @@ void Game::keyPressed(const sf::Event::KeyPressed* event)
 		if(event->scancode == sf::Keyboard::Scancode::Enter)
 		{
 			state = MENU;
-			hasStateChanged = true;
+			//hasStateChanged = true;
 
 		}
 
@@ -282,6 +286,22 @@ void Game::DragSprite(sf::Sprite* sprite)
 		sf::Vector2f drag_position = mouse_positionf - drag_offset;
 		sprite->setPosition({drag_position.x, drag_position.y});
 	}
+
+}
+
+void Game::CorrectPassport()
+{
+	if(shouldACCEPT == true && ClickStampA == true || shouldACCEPT == false && ClickStampR == true)
+	{
+		menu->setString("correct");
+		served = true;
+	}
+	else if(shouldACCEPT == false && ClickStampA == true  || shouldACCEPT == true && ClickStampR == true)
+	{
+		menu->setString("wrong");
+		served = true;
+	}
+	
 
 }
 
