@@ -59,6 +59,14 @@ void Game::update(float dt)
 		menu->setCharacterSize(120);
 		selection->setString("Play  Quit");
 		selection->setCharacterSize(60);
+		if(ChosenOption == 1)
+		{
+			selection->setString("<Play>  Quit");
+		}
+		if(ChosenOption == 0)
+		{
+			selection->setString("Play  <Quit>");
+		}
 		break;
 	case GAME:
 		//std::cout << "game";
@@ -109,7 +117,7 @@ void Game::render()
 		window.draw(*background);
 		window.draw(*Character);
 		window.draw(*Passport);
-        window.draw(*menu);
+        //window.draw(*menu);
 
 		if(StampsVisible == true)
 		{
@@ -214,15 +222,13 @@ void Game::keyPressed(const sf::Event::KeyPressed* event)
 	{
 	case MENU:
 		//selection
-int ChosenOption;
+
 		if(event->scancode == sf::Keyboard::Scancode::D)
 		{
-			selection->setString("Play  <Quit>");
 			ChosenOption = 0;
 		}
 		if (event->scancode == sf::Keyboard::Scancode::A)
 		{
-			selection->setString("<Play>  Quit");
 			ChosenOption = 1;
 		}
 		if (event->scancode == sf::Keyboard::Scancode::Enter && ChosenOption == 1)

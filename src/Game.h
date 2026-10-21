@@ -54,6 +54,8 @@ private:
     sf::Text* menu =  new sf::Text(*f);
 	sf::Text* selection = new sf::Text(*f);
 
+	int ChosenOption = 1;
+
     bool shouldACCEPT;
 	bool StampsVisible;
 	bool DoubleClick;
