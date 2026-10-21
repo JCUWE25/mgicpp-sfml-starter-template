@@ -38,6 +38,8 @@ bool Game::init()
 	selection->setPosition({400, 400});
 	menu->setPosition({ 100, 100 });
 	menu->setString("does it work");
+	lifes->setPosition({50, 5});
+	lifeNum->setPosition({ 200, 5});
 	
 	state = MENU;
   return true;
@@ -59,6 +61,7 @@ void Game::update(float dt)
 		menu->setCharacterSize(120);
 		selection->setString("Play  Quit");
 		selection->setCharacterSize(60);
+		
 		if(ChosenOption == 1)
 		{
 			selection->setString("<Play>  Quit");
@@ -72,6 +75,12 @@ void Game::update(float dt)
 		//std::cout << "game";
 		
 		DragSprite(dragged);
+
+
+		lifes->setString("lifes: ");
+		lifes->setCharacterSize(60);
+		lifeNum->setString(std::to_string(lifesCounter));
+		lifeNum->setCharacterSize(60);
 
 //stamp stick to passport
 Astamp->setPosition({ Passport->getPosition().x, Passport->getPosition().y });
@@ -94,7 +103,12 @@ if (served == true)
 	/*hasStateChanged = false;
 	}*/
 
-
+	// game over
+	if(lifesCounter == 0)
+	{
+		state = QUIT;
+		lifesCounter = 3;
+	}
 
 
 }
@@ -117,7 +131,8 @@ void Game::render()
 		window.draw(*background);
 		window.draw(*Character);
 		window.draw(*Passport);
-        //window.draw(*menu);
+        window.draw(*lifes);
+		window.draw(*lifeNum);
 
 		if(StampsVisible == true)
 		{
@@ -327,6 +342,7 @@ void Game::CorrectPassport()
 	else if(shouldACCEPT == false && ClickStampA == true  || shouldACCEPT == true && ClickStampR == true)
 	{
 		menu->setString("wrong");
+		lifesCounter--;
 		served = true;
 	}
 	
