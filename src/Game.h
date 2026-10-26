@@ -25,7 +25,7 @@ public:
 	void NewAnimal();
 	void DragSprite(sf::Sprite* sprite);
 	void CorrectPassport();
-	void TimeToString();
+	int timeToText();
 
 private:
 	sf::RenderWindow& window;
@@ -68,7 +68,7 @@ private:
 	int lifesCounter = 3;
 	int ChosenOption = 1;
 	int qouta = 0;
-	int timerDigits = 120;
+	int timerDigits;
 
     bool shouldACCEPT;
 	bool StampsVisible;

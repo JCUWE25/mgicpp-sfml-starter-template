@@ -1,5 +1,6 @@
 
 #include "Game.h"
+#include <SFML/System/String.hpp>
 #include <iostream>
 
 
@@ -90,9 +91,10 @@ void Game::update(float dt)
 		timerTXT->setCharacterSize(60);
 		timerTXT->setPosition({ 550, 5 });
 
-		timeNum->setString(std::to_string(timerDigits));
-		timeNum->setCharacterSize(60);
-		timeNum->setPosition({ 750, 5 });
+		//std::string timer = std::to_string(game_clock.getElapsedTime().asSeconds());
+		//float tempTimeF = std::stof(timer);
+		//int tempTimeI = static_cast<int>(round(tempTimeF));
+
 		// TIMER HAS RUN OUT
 		if(game_clock.getElapsedTime().asSeconds() >= 120)
 		{
@@ -123,6 +125,8 @@ if(qouta == 6)
 	HasWon = true;
 	state = QUIT;
 }
+
+
 //new  passport
 if (served == true)
 {
@@ -158,7 +162,11 @@ menu->setString("Game Over");
 	}
 	/*hasStateChanged = false;
 	}*/
+	int TimeI = timeToText();
 
+	timeNum->setString(std::to_string(TimeI));
+	timeNum->setCharacterSize(60);
+	timeNum->setPosition({ 750, 5 });
 	// game over
 	if(lifesCounter == 0)
 	{
@@ -351,6 +359,7 @@ void Game::keyPressed(const sf::Event::KeyPressed* event)
 				state = GAME;
 				HasWon = false;
 				qouta = 0;
+				game_clock.restart();
 				//hasStateChanged = true;
 
 			}
@@ -433,10 +442,16 @@ void Game::CorrectPassport()
 
 }
 
-void Game::TimeToString()
+int Game::timeToText()
 {
-	
+std::string timer = std::to_string(game_clock.getElapsedTime().asSeconds());
+float tempTimeF = std::stof(timer);
+int tempTimeI = static_cast<int>(round(tempTimeF));
+
+return tempTimeI;
 }
+
+
 
 
 
