@@ -42,10 +42,15 @@ bool Game::init()
 	NewAnimal();
 
 	selection->setPosition({400, 400});
+	
 	menu->setPosition({ 100, 100 });
 	menu->setString("does it work");
+	
 	lifes->setPosition({50, 5});
 	lifeNum->setPosition({ 200, 5});
+	
+	timerTXT->setPosition({ 50, 5 });
+	timeNum->setPosition({ 200, 5 });
 	
 	state = MENU;
 	
@@ -80,6 +85,14 @@ void Game::update(float dt)
 		}
 		break;
 	case GAME:
+		timerDigits--;
+		timerTXT->setString("Timer: ");
+		timerTXT->setCharacterSize(60);
+		timerTXT->setPosition({ 550, 5 });
+
+		timeNum->setString(std::to_string(timerDigits));
+		timeNum->setCharacterSize(60);
+		timeNum->setPosition({ 750, 5 });
 		// TIMER HAS RUN OUT
 		if(game_clock.getElapsedTime().asSeconds() >= 120)
 		{
@@ -178,6 +191,8 @@ void Game::render()
 		window.draw(*lifeNum);
 		window.draw(*task);
 		window.draw(*QuotaNum);
+		window.draw(*timerTXT); 
+		window.draw(*timeNum);
 
 		if(StampsVisible == true)
 		{
@@ -416,6 +431,11 @@ void Game::CorrectPassport()
 	}
 	
 
+}
+
+void Game::TimeToString()
+{
+	
 }
 
 

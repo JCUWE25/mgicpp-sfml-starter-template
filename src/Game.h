@@ -25,6 +25,7 @@ public:
 	void NewAnimal();
 	void DragSprite(sf::Sprite* sprite);
 	void CorrectPassport();
+	void TimeToString();
 
 private:
 	sf::RenderWindow& window;
@@ -57,12 +58,17 @@ private:
 	
 	sf::Text* lifes = new sf::Text(*f);
 	sf::Text* lifeNum = new sf::Text(*f);
+
 	sf::Text* task = new sf::Text(*f);
 	sf::Text* QuotaNum = new sf::Text(*f);
+
+	sf::Text* timerTXT = new sf::Text(*f);
+	sf::Text* timeNum = new sf::Text(*f);
 
 	int lifesCounter = 3;
 	int ChosenOption = 1;
 	int qouta = 0;
+	int timerDigits = 120;
 
     bool shouldACCEPT;
 	bool StampsVisible;
