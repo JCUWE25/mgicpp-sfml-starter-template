@@ -12,7 +12,7 @@ class Game
 public:
 	GameState state;
 	bool hasStateChanged;
-	Game(sf::RenderWindow& window);
+	Game(sf::RenderWindow& window, sf::Clock clock);
 	~Game();
 	bool init();
 	void update(float dt);
@@ -28,6 +28,7 @@ public:
 
 private:
 	sf::RenderWindow& window;
+	sf::Clock game_clock;
 
     //BG
 	sf::Texture* background_texture = new sf::Texture("../Data/Images/WhackaMole Worksheet/background.png");

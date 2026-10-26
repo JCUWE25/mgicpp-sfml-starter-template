@@ -4,11 +4,17 @@
 
 
 
-Game::Game(sf::RenderWindow& game_window)
-  : window(game_window)
+Game::Game(sf::RenderWindow& game_window, sf::Clock clock)
+  : window(game_window), game_clock(clock)
 {
   srand(time(NULL)); //seeds random number generator with the current time
 }
+
+//Game::Game(sf::RenderWindow& window, sf::Clock clock)
+//{
+//
+//	srand(time(NULL));
+//}
 
 Game::~Game()
 {
@@ -42,6 +48,8 @@ bool Game::init()
 	lifeNum->setPosition({ 200, 5});
 	
 	state = MENU;
+	
+
   return true;
 }
 
@@ -72,8 +80,12 @@ void Game::update(float dt)
 		}
 		break;
 	case GAME:
-		//std::cout << "game";
-		
+		// TIMER HAS RUN OUT
+		if(game_clock.getElapsedTime().asSeconds() >= 120)
+		{
+			state = QUIT;
+		}
+
 		DragSprite(dragged);
 
 		QuotaNum->setPosition({ 900, 5 });
@@ -284,6 +296,7 @@ void Game::keyPressed(const sf::Event::KeyPressed* event)
 		}
 		if (event->scancode == sf::Keyboard::Scancode::Enter && ChosenOption == 1)
 		{
+			game_clock.restart();		
 			state = GAME;
 			//hasStateChanged = true;
 

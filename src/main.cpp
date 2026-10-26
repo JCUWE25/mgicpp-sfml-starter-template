@@ -12,8 +12,10 @@ int main()
   sf::RenderWindow window(sf::VideoMode({ 1080, 720 }), "SFML game");
   window.setFramerateLimit(60);
 
+  // A Clock starts counting as soon as it's created
+  sf::Clock clock;
   //initialise an instance of the game class
-  Game game(window);
+  Game game(window, clock);
 
   //run the init function of the game class and check it all initialises ok
   if (!game.init())
@@ -21,8 +23,6 @@ int main()
       return 0;
   }
 
-  // A Clock starts counting as soon as it's created
-  sf::Clock clock;
 
   // Game loop: run the program as long as the window is open
   while (window.isOpen())
